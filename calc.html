@@ -1,0 +1,74 @@
+<--2021/2/20 calc-->
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>calc</title>
+	</head>
+	<body>
+		<div>
+			<input type="text" size="5" id="num_1" value=""/>
+			<select id="sign">
+				<option value="+"> + </option>
+				<option value="-"> - </option>
+				<option value="*"> * </option>
+				<option value="/"> / </option>
+				<option value="%">mod</option>
+			</select>
+			<input type="text" size="5" id="num_2" value=""/>
+			<input type="button" value="计算" id="btn"/>
+		</div>
+		<input type="text" id="result" disabled />
+		<script>
+			document.getElementById('btn').onclick = function(){
+				const num1 = document.getElementById('num_1');
+				const num2 = document.getElementById('num_2');
+				const sign = document.getElementById('sign');
+				
+				if(num1.value==""||num2.value==""){
+					alert('计算的数不能为空','提示');
+					return false;
+				}
+				
+				if (isNaN(num1.value)||isNaN(num2.value)){
+					alert('请输入二个正确的数字','提示');
+					return false;
+				}
+				
+				var result = document.getElementById('result');
+				let num1_value = parseFloat(num1.value);
+				let num2_value = parseFloat(num2.value);
+				let sign_value = sign.value;
+				
+				switch(sign_value){
+					case '+':
+					result.value=num1_value+num2_value;
+					break;
+					case '-':
+					result.value=num1_value-num2_value;
+					break;
+					case '*':
+					result.value=num1_value*num2_value;
+					break;
+					case '/':
+					if(num2_value===0){
+						alert('被除数不能为0','错误');
+						return false;
+					}else{
+						result.value=num1_value/num2_value;
+					}
+					break;
+					case '%':
+					if(parseInt(num1.value)==num1.value&&
+					   parseInt(num2.value)==num2.value){
+						result.value=num1_value%num2_value;
+					}else{
+						alert('模运算不能输入浮点类型的数据','错误');
+						return false;
+					}
+					break;
+				}
+			}
+		</script>
+	</body>
+</html>
